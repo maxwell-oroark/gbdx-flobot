@@ -1,6 +1,6 @@
 {
   "name": "🌟 Starbot",
-  "description": "tarbot is GitHub's trending open-source page, reincarnated as a Slack bot",
+  "description": "Starbot is GitHub's trending open-source page, reincarnated as a Slack bot",
   "repository": "https://github.com/mattcreager/starbot",
   "logo": "https://small-sharp-tool.com/logo.svg",
   "success_url": "/",

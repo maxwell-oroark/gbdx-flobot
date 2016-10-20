@@ -36,6 +36,8 @@ const handler = (payload, res) => {
             'auth': {'bearer': token}
         })
         .on('response', function(response) {
+            console.log("===response===")
+            console.log(response)
             let workflows = response.body.Workflows
             if (response.statusCode === 200 && workflows.length > 0) {
                 let attachments = workflows.slice(0, 5).map((workflow) => {

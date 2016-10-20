@@ -23,8 +23,10 @@ const msgDefaults = {
 
 const handler = (payload, res) => {
 
-    console.log("===payload===")
-    console.log(payload)
+    let workflowId = payload.text.match(/d+/)[0]
+
+    console.log("workflowId")
+    console.log(workflowId)
 
     let options = {
         url: `https://geobigdata.io/workflows/v1/workflows/${workflowId}`,

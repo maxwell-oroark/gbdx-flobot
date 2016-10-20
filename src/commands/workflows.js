@@ -4,11 +4,7 @@
 const _ = require('lodash')
 const config = require('../config')
 const request = require('request')
-const token= config('GBDX_ACCESS_TOKEN')
-
-console.log("GBDX TOKEN")
-console.log(token)
-
+const token = config('GBDX_ACCESS_TOKEN')
 
 const msgDefaults = {
   response_type: 'in_channel',
@@ -36,7 +32,7 @@ const handler = (payload, res) => {
         channel: payload.channel_name,
         attachments: emptyAttachment
     }, msgDefaults)
-    
+
     let options = {
         url: 'https://geobigdata.io/workflows/v1/workflows',
         headers: {
@@ -49,6 +45,9 @@ const handler = (payload, res) => {
             var info = JSON.parse(body)
             console.log("INFO")
             console.log(info)
+        } else {
+            console.log(response.statusCode)
+            console.log(error)
         }
     }
 

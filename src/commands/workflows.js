@@ -9,7 +9,8 @@ const token = config('GBDX_ACCESS_TOKEN')
 const msgDefaults = {
   response_type: 'in_channel',
   username: 'Starbot',
-  icon_emoji: config('ICON_EMOJI')
+  icon_emoji: config('ICON_EMOJI'),
+  attachment: emptyAttachment
 }
 
 let emptyAttachment = [
@@ -29,7 +30,7 @@ const handler = (payload, res) => {
 
     let msg = _.defaults({
         channel: payload.channel_name,
-        attachments: emptyAttachment
+        attachments: attachments
     }, msgDefaults)
 
     let options = {
@@ -42,16 +43,25 @@ const handler = (payload, res) => {
 
     function callback(error, response, body) {
         if (!error && response.statusCode === 200) {
-            let info = JSON.parse(body)
-            console.log("INFO")
-            console.log(info)
-            res.set('content-type', 'application/json')
-            res.status(200).json(msg)
-        } else {
-            console.log(response.statusCode)
+            let body = JSON.parse(body)
+            let workflows = body.Workflows
+            let attachments = parseWorkflows(workflows)
+
             res.set('content-type', 'application/json')
             res.status(200).json(msg)
         }
+        return;
+    }
+
+    function parseWorkflows(workflows) {
+        workflows.slice(0, 5).map((workflow) => {
+          return {
+            title: `workflowsss `,
+            title_link: `workflowing`,
+            text: `workflow id: ${workflow}`,
+            mrkdwn_in: ['text', 'pretext']
+          }
+        })
     }
 
     request(options, callback)

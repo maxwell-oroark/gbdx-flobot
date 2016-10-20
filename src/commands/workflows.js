@@ -37,13 +37,12 @@ const handler = (payload, res) => {
         headers: {
             'Authorization':`Bearer ${token}`,
             'Content-Type': 'application/json',
-            'accept-encoding': 'gzip, deflate'
         }
     }
 
     function callback(error, response, body) {
         if (!error && response.statusCode === 200) {
-            var info = body
+            let info = JSON.parse(body)
             console.log("INFO")
             console.log(info)
             res.set('content-type', 'application/json')

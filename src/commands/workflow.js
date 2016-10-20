@@ -46,4 +46,4 @@ const handler = (payload, res) => {
 
 }
 
-module.exports = { pattern: /workflow\w+\d/ig, handler: handler }
+module.exports = { pattern: /workflow\s\d+/ig, handler: handler }

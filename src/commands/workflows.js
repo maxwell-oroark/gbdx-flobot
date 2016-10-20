@@ -21,13 +21,7 @@ const msgDefaults = {
   attachments: noWorkflowsAttachment
 }
 
-
-// each attachment will be one workflow plug the info into this template.  color can be variable
-// based on the status of the workflow and the text will be the actual text
-// title will be the ID of the workflow obviously.
-
 const handler = (payload, res) => {
-
 
     let options = {
         url: "https://geobigdata.io/workflows/v1/workflows",

@@ -26,10 +26,12 @@ app.get('/', (req, res) => { res.send('\n 👋 🌍 \n') })
 
 app.post('/commands/gbdx', (req, res) => {
   let payload = req.body
+  console.log("===PAYLOAD===")
+  console.log(payload)
 
   if (!payload || payload.token !== config('STARBOT_COMMAND_TOKEN')) {
-    let err = '✋  Star—what? An invalid slash token was provided\n' +
-              '   Is your Slack slash token correctly configured?'
+    let err = '✋  gbdx—what? An invalid slash token was provided\n' +
+              'try gbdx help for valid commands'
     console.log(err)
     res.status(401).end(err)
     return

@@ -21,7 +21,6 @@ let emptyAttachment = [
   }
 ]
 
-
 // each attachment will be one workflow plug the info into this template.  color can be variable
 // based on the status of the workflow and the text will be the actual text
 // title will be the ID of the workflow obviously.
@@ -56,8 +55,7 @@ const handler = (payload, res) => {
             res.status(200).json(msg)
         }
     }
-    console.log("===REQUEST===")
-    console.log(request(options, callback))
+
     request(options, callback)
 
     return

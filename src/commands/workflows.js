@@ -36,9 +36,7 @@ const handler = (payload, res) => {
     let options = {
         url: "https://geobigdata.io/workflows/v1/workflows",
         headers: {
-            'Authorization': {
-                'Bearer': token
-            },
+            'Authorization':`Bearer ${token}`
             'Content-Type': 'application/json',
             'accept-encoding': 'gzip, deflate'
         }
@@ -52,8 +50,8 @@ const handler = (payload, res) => {
             res.set('content-type', 'application/json')
             res.status(200).json(msg)
         } else {
-            console.log(response.statusCode)
-            console.log(error)
+            console.log(response.status)
+            console.log(response.message)
             res.set('content-type', 'application/json')
             res.status(200).json(msg)
         }

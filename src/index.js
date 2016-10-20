@@ -40,9 +40,6 @@ app.post('/commands/gbdx', (req, res) => {
     return payload.text.match(cmd.pattern) ? cmd : a
   }, helpCommand)
 
-  console.log("====cmd====")
-  console.log(cmd)
-
   cmd.handler(payload, res)
 })
 

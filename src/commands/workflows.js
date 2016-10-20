@@ -29,10 +29,6 @@ const msgDefaults = {
 
 const handler = (payload, res) => {
 
-    let msg = _.defaults({
-        channel: payload.channel_name,
-        attachments: attachments
-    }, msgDefaults)
 
     let options = {
         url: "https://geobigdata.io/workflows/v1/workflows",
@@ -49,6 +45,10 @@ const handler = (payload, res) => {
             console.log("workflows")
             console.log(workflows)
             let attachments = parseWorkflows(workflows)
+            let msg = _.defaults({
+                channel: payload.channel_name,
+                attachments: attachments
+            }, msgDefaults)
 
             res.set('content-type', 'application/json')
             res.status(200).json(msg)

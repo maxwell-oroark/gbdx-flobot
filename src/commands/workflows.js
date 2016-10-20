@@ -57,10 +57,10 @@ const handler = (payload, res) => {
     }
 
     function parseWorkflows(workflows) {
-        let attachments = workflows.slice(0, 5).map((workflow, i) => {
+        let attachments = workflows.slice(0, 5).map((workflowId, i) => {
           return {
             title: `workflow ${i + 1}:`,
-            text: `_workflow id_*:* ${workflow}`,
+            text: "_workflow id_*:*" + workflowId,
             color: `#2980b9`,
             mrkdwn_in: ['text']
           }

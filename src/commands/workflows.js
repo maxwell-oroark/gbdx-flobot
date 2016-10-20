@@ -6,21 +6,22 @@ const config = require('../config')
 const request = require('request')
 const token = config('GBDX_ACCESS_TOKEN')
 
+const noWorkflowsAttachment = [
+    {
+        title: 'WORKFLOWS:',
+        color: '#e67e22',
+        text: 'oops, you have no workflows to show',
+        mrkdwn_in: ['text']
+    }
+]
+
 const msgDefaults = {
   response_type: 'in_channel',
   username: 'Starbot',
   icon_emoji: config('ICON_EMOJI'),
-  attachment: emptyAttachment
+  attachment: noWorkflowsAttachment
 }
 
-let emptyAttachment = [
-  {
-    title: 'WORKFLOWS:',
-    color: '#e67e22',
-    text: 'oops, you have no workflows to show',
-    mrkdwn_in: ['text']
-  }
-]
 
 // each attachment will be one workflow plug the info into this template.  color can be variable
 // based on the status of the workflow and the text will be the actual text

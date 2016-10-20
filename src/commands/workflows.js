@@ -33,11 +33,11 @@ const handler = (payload, res) => {
 
     request
         .get('https://geobigdata.io/workflows/v1/workflows', {
-            'auth': {'bearer': token}
+            'auth': {'bearer':token}
         })
         .on('response', function(response) {
             console.log("===response===")
-            console.log(response)
+            console.log(response.body)
             let workflows = response.body.Workflows
             if (response.statusCode === 200 && workflows.length > 0) {
                 let attachments = workflows.slice(0, 5).map((workflow) => {

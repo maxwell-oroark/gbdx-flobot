@@ -19,7 +19,7 @@ const msgDefaults = {
   response_type: 'in_channel',
   username: 'Starbot',
   icon_emoji: config('ICON_EMOJI'),
-  attachment: noWorkflowsAttachment
+  attachments: noWorkflowsAttachment
 }
 
 

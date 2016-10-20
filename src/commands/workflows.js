@@ -8,9 +8,8 @@ const token = config('GBDX_ACCESS_TOKEN')
 
 const noWorkflowsAttachment = [
     {
-        title: 'WORKFLOWS:',
-        color: '#e67e22',
-        text: 'oops, you have no workflows to show',
+        color: '#f1c40f',
+        text: 'you have no workflows to show',
         mrkdwn_in: ['text']
     }
 ]
@@ -57,12 +56,13 @@ const handler = (payload, res) => {
     }
 
     function parseWorkflows(workflows) {
+        if (!workflows.length) return;
         let attachments = workflows.slice(0, 5).map((workflowId, i) => {
           return {
             title: `workflow ${i + 1}:`,
-            text: "_workflow id_*:*" + workflowId,
+            text: `workflow id: ${workflowId}`,
             color: `#2980b9`,
-            mrkdwn_in: ['text']
+            mrkdwn_in: ['text', 'pretext']
           }
         })
         return attachments
@@ -70,7 +70,7 @@ const handler = (payload, res) => {
 
     request(options, callback)
 
-    return
+    return;
 
 }
 

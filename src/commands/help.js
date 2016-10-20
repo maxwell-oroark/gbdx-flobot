@@ -14,7 +14,8 @@ let attachments = [
   {
     title: 'flobot will help you find information on your gbdx workflows',
     color: '#2FA44F',
-    text: '`/gbdx workflows` returns a list of your gbdx workflows',
+    text: '`/gbdx workflows` returns a list of your gbdx workflows\n' +
+    '`gbdx workflow [id of your workflow]` will return information on your workflow',
     mrkdwn_in: ['text']
   },
   {

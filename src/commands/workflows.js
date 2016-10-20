@@ -49,8 +49,7 @@ const handler = (payload, res) => {
             res.set('content-type', 'application/json')
             res.status(200).json(msg)
         } else {
-            console.log(response.status)
-            console.log(response.message)
+            console.log(response.statusCode)
             res.set('content-type', 'application/json')
             res.status(200).json(msg)
         }

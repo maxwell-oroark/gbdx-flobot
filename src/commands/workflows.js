@@ -45,6 +45,8 @@ const handler = (payload, res) => {
         if (!error && response.statusCode === 200) {
             let body = JSON.parse(body)
             let workflows = body.Workflows
+            console.log("workflows")
+            console.log(workflows)
             let attachments = parseWorkflows(workflows)
 
             res.set('content-type', 'application/json')

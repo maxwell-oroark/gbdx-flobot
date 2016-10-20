@@ -12,13 +12,13 @@ const msgDefaults = {
 
 let attachments = [
   {
-    title: 'Starbot will help you find the hippest repos on GitHub',
+    title: 'flobot will help you find information on your gbdx workflows',
     color: '#2FA44F',
-    text: '`/starbot repos` returns hip repos \n`/starbot javascript` returns hip JavaScript repos',
+    text: '`/gbdx workflows` returns a list of your gbdx workflows',
     mrkdwn_in: ['text']
   },
   {
-    title: 'Configuring Starbot',
+    title: 'Configuring GBDX',
     color: '#E3E4E6',
     text: '`/starbot help` ... you\'re lookin at it! \n',
     mrkdwn_in: ['text']

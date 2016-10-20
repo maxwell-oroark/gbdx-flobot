@@ -37,8 +37,6 @@ app.post('/commands/gbdx', (req, res) => {
   }
 
   let cmd = _.reduce(commands, (a, cmd) => {
-    console.log("===a===")
-    console.log(a)
     return payload.text.match(cmd.pattern) ? cmd : a
   }, helpCommand)
 

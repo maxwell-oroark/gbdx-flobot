@@ -49,16 +49,19 @@ const handler = (payload, res) => {
             var info = JSON.parse(body)
             console.log("INFO")
             console.log(info)
+            res.set('content-type', 'application/json')
+            res.status(200).json(msg)
         } else {
             console.log(response.statusCode)
             console.log(error)
+            res.set('content-type', 'application/json')
+            res.status(200).json(msg)
         }
     }
-
+    console.log("===REQUEST===")
+    console.log(request(options, callback))
     request(options, callback)
 
-    res.set('content-type', 'application/json')
-    res.status(200).json(msg)
     return
 
 }

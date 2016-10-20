@@ -43,7 +43,7 @@ const handler = (payload, res) => {
 
     function callback(error, response, body) {
         if (!error && response.statusCode === 200) {
-            var info = JSON.parse(body)
+            var info = body
             console.log("INFO")
             console.log(info)
             res.set('content-type', 'application/json')

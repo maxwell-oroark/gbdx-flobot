@@ -25,10 +25,6 @@ let emptyAttachment = [
   }
 ]
 
-let msg = _.defaults({
-    channel: payload.channel_name,
-    attachments: emptyAttachment
-}, msgDefaults)
 
 // each attachment will be one workflow plug the info into this template.  color can be variable
 // based on the status of the workflow and the text will be the actual text
@@ -36,6 +32,11 @@ let msg = _.defaults({
 
 const handler = (payload, res) => {
 
+    let msg = _.defaults({
+        channel: payload.channel_name,
+        attachments: emptyAttachment
+    }, msgDefaults)
+    
     let options = {
         url: 'https://geobigdata.io/workflows/v1/workflows',
         headers: {

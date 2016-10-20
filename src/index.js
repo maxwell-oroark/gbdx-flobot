@@ -30,16 +30,20 @@ app.post('/commands/gbdx', (req, res) => {
   console.log(payload)
 
   if (!payload || payload.token !== config('STARBOT_COMMAND_TOKEN')) {
-    let err = '✋  gbdx—what? An invalid slash token was provided\n' +
-              'try gbdx help for valid commands'
+    let err = '✋  gbdx—what? An invalid slash token was provided'
     console.log(err)
     res.status(401).end(err)
     return
   }
 
   let cmd = _.reduce(commands, (a, cmd) => {
+    console.log("===cmdpattern===")
+    console.log(cmd.pattern)
     return payload.text.match(cmd.pattern) ? cmd : a
   }, helpCommand)
+
+  console.log("====cmd====")
+  console.log(cmd)
 
   cmd.handler(payload, res)
 })
@@ -54,3 +58,20 @@ app.listen(config('PORT'), (err) => {
     bot.listen({ token: config('SLACK_TOKEN') })
   }
 })
+
+
+// EXAMPLE PAYLOAD BELOW:
+
+// {
+//     token: 'EVIhl6bmTB2OqkjYssHcLejN',
+//     team_id: 'T0KC9NUQ4',
+//     team_domain: 'dg-platform',
+//     channel_id: 'D1A345VJT',
+//     channel_name: 'directmessage',
+//     user_id: 'U19HWME7N',
+//     user_name: 'maxwello',
+//     command: '/gbdx',
+//     text: '123',
+//     response_url: 'https://hooks.slack.com/commands/T0KC9NUQ4/94086706694/11TBNuaae2GvdmVb55hWzFC8'
+// }
+//

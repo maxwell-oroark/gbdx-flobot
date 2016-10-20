@@ -23,7 +23,7 @@ const msgDefaults = {
 
 const handler = (payload, res) => {
 
-    let workflowId = payload.text.match(/d+/)
+    let workflowId = payload.text.match(/\d+/)[0]
 
     console.log("workflowId")
     console.log(workflowId)

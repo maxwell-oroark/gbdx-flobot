@@ -57,7 +57,7 @@ const handler = (payload, res) => {
     }
 
     function parseWorkflows(workflows) {
-        workflows.slice(0, 5).map((workflow) => {
+        let attachments = workflows.slice(0, 5).map((workflow) => {
           return {
             title: `workflowsss `,
             title_link: `workflowing`,
@@ -65,6 +65,7 @@ const handler = (payload, res) => {
             mrkdwn_in: ['text', 'pretext']
           }
         })
+        return attachments
     }
 
     request(options, callback)

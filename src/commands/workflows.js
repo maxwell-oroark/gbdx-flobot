@@ -40,11 +40,11 @@ const handler = (payload, res) => {
 
     function callback(error, response, body) {
         if (!error && response.statusCode === 200) {
-            let body = JSON.parse(body)
-            let workflows = body.Workflows
+            let workflows = JSON.parse(body).Workflows
             console.log("workflows")
             console.log(workflows)
             let attachments = parseWorkflows(workflows)
+
             let msg = _.defaults({
                 channel: payload.channel_name,
                 attachments: attachments

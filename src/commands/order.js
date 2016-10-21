@@ -32,8 +32,8 @@ const handler = (payload, res) => {
 
     let callback = function (error, response, body) {
 
-        console.log("===BODY===")
-        console.log(JSON.parse(body))
+        console.log("===status===")
+        console.log(response.statusCode)
 
         if (!error && response.statusCode === 200) {
 

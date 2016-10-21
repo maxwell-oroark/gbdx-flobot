@@ -50,6 +50,8 @@ const handler = (payload, res) => {
                 }
                 let statusColor = colorMap[acquisition.state]
                 return {
+                    pretext: "Your order has been placed",
+                    author_name: `${acquisitions.order_id}`,
                     title: `${acquisition.acquisition_id}`,
                     color: `${statusColor}`,
                     text: `location of acquisition is ${acquisition.location}`,

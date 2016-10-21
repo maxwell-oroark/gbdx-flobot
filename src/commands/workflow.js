@@ -24,7 +24,7 @@ const msgDefaults = {
 let callback = function (error, response, body) {
     if (!error && response.statusCode === 200) {
         let tasks = JSON.parse(body).tasks.tasks
-        console.log("tasks")
+        console.log("===tasks")
         console.log(tasks)
 
         // map over tasks here

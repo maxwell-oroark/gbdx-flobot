@@ -31,6 +31,10 @@ const handler = (payload, res) => {
     }
 
     let callback = function (error, response, body) {
+
+        console.log("===BODY===")
+        console.log(JSON.parse(body))
+
         if (!error && response.statusCode === 200) {
 
             console.log("===BODY===")
@@ -54,8 +58,7 @@ const handler = (payload, res) => {
             'Authorization':`Bearer ${token}`,
             'Content-Type': 'application/json',
         },
-        body: `[${catId}]`,
-        json: true
+        json: [catId],
     }
 
     request(options,callback)

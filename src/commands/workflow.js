@@ -25,9 +25,6 @@ const handler = (payload, res) => {
 
     let workflowId = payload.text.match(/\d+/)[0]
 
-    console.log("workflowId")
-    console.log(workflowId)
-
     let options = {
         url: `https://geobigdata.io/workflows/v1/workflows/${workflowId}`,
         headers: {
@@ -36,20 +33,31 @@ const handler = (payload, res) => {
         }
     }
 
-    let msg = _.defaults({
-        channel: payload.channel_name,
-        attachments: [
-            {
-                color: '#f1c40f',
-                text: `this response is under construction
-                but your workflow id is: ${workflowId}`,
-                mrkdwn_in: ['text']
-            }
-        ]
-    }, msgDefaults)
+    let callback = function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            let tasks = JSON.parse(body).Events
+            console.log("tasks")
+            console.log(tasks)
 
-    res.set('content-type', 'application/json')
-    res.status(200).json(msg)
+            let msg = _.defaults({
+                channel: payload.channel_name,
+                attachments: [
+                    {
+                        color: '#f1c40f',
+                        text: `this response is under construction
+                        but your workflow id is: ${workflowId}`,
+                        mrkdwn_in: ['text']
+                    }
+                ]
+            }, msgDefaults)
+
+            res.set('content-type', 'application/json')
+            res.status(200).json(msg)
+        }
+        return;
+    }
+
+    request(options,callback)
 
     return;
 

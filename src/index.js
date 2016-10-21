@@ -8,6 +8,7 @@ const _ = require('lodash')
 const config = require('./config')
 const commands = require('./commands')
 const helpCommand = require('./commands/help')
+const isLoggedIn = require('./login/login.js')
 
 let bot = require('./bot')
 
@@ -21,6 +22,8 @@ if (config('PROXY_URI')) {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// app.use(isLoggedIn)
 
 app.get('/', (req, res) => { res.send('\n 👋 🌍 \n') })
 

@@ -21,6 +21,37 @@ const msgDefaults = {
   attachments: noWorkflowsAttachment
 }
 
+function parseWorkflows(workflows) {
+    if (!workflows.length) return;
+    let attachments = workflows.slice(0, 5).map((workflowId, i) => {
+        return {
+            title: `workflow ${i + 1}:`,
+            text: `workflow id: ${workflowId}`,
+            color: `#2980b9`,
+            mrkdwn_in: ['text', 'pretext']
+        }
+    })
+    return attachments
+}
+
+function callback(error, response, body) {
+    if (!error && response.statusCode === 200) {
+        let workflows = JSON.parse(body).Workflows
+        console.log("workflows")
+        console.log(workflows)
+        let attachments = parseWorkflows(workflows)
+
+        let msg = _.defaults({
+            channel: payload.channel_name,
+            attachments: attachments
+        }, msgDefaults)
+
+        res.set('content-type', 'application/json')
+        res.status(200).json(msg)
+    }
+    return;
+}
+
 const handler = (payload, res) => {
 
     let options = {
@@ -29,37 +60,6 @@ const handler = (payload, res) => {
             'Authorization':`Bearer ${token}`,
             'Content-Type': 'application/json',
         }
-    }
-
-    function callback(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            let workflows = JSON.parse(body).Workflows
-            console.log("workflows")
-            console.log(workflows)
-            let attachments = parseWorkflows(workflows)
-
-            let msg = _.defaults({
-                channel: payload.channel_name,
-                attachments: attachments
-            }, msgDefaults)
-
-            res.set('content-type', 'application/json')
-            res.status(200).json(msg)
-        }
-        return;
-    }
-
-    function parseWorkflows(workflows) {
-        if (!workflows.length) return;
-        let attachments = workflows.slice(0, 5).map((workflowId, i) => {
-          return {
-            title: `workflow ${i + 1}:`,
-            text: `workflow id: ${workflowId}`,
-            color: `#2980b9`,
-            mrkdwn_in: ['text', 'pretext']
-          }
-        })
-        return attachments
     }
 
     request(options, callback)

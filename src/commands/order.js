@@ -39,26 +39,22 @@ const handler = (payload, res) => {
 
             let acquisitions = body.acquisitions
 
-
-
             let attachments = acquisitions.slice().map((acquisition) => {
                 console.log("==acquisition==")
                 console.log(acquisition)
                 let colorMap = {
                     delivered : '#2ecc71',
+                    ordering  : '#f1c40f',
                     submitted   : '#e67e22'
                 }
                 let statusColor = colorMap[acquisition.state]
                 return {
-                    title: `${acquisition.order_id}`,
+                    title: `${acquisition_id}`,
                     color: `${statusColor}`,
                     text: `location of acquisition is ${acquisition.location}`,
                     mrkdwn_in: ['text', 'pretext']
                 }
             })
-
-
-
 
             let msg = _.defaults({
                 channel: payload.channel_name,

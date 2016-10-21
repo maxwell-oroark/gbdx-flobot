@@ -37,8 +37,27 @@ const handler = (payload, res) => {
 
         if (!error && response.statusCode === 200) {
 
-            console.log("===BODY===")
-            console.log(body.order_id)
+            let acquisitions = body.acquisitions
+
+
+
+            let attachments = acquisitions.slice().map((acquisition) => {
+                console.log("==acquisition==")
+                console.log(acquisition)
+                let colorMap = {
+                    delivered : '#2ecc71',
+                    submitted   : '#e67e22'
+                }
+                let statusColor = colorMap[acquisition.state]
+                return {
+                    title: `${acquisition.order_id`,
+                    color: `${statusColor}`,
+                    text: `location of acquisition is ${acquisition.location}`,
+                    mrkdwn_in: ['text', 'pretext']
+                }
+            })
+
+
             // {
             //   "order_id": "ebffda38-1d6e-4fff-9ae2-aaca94243c45",
             //   "acquisitions": [
@@ -54,6 +73,8 @@ const handler = (payload, res) => {
             //     }
             //   ]
             // }
+
+
 
 
             let msg = _.defaults({

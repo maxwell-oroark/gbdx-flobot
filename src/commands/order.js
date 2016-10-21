@@ -49,7 +49,7 @@ const handler = (payload, res) => {
                 }
                 let statusColor = colorMap[acquisition.state]
                 return {
-                    title: `${acquisition_id}`,
+                    title: `${acquisition.acquisition_id}`,
                     color: `${statusColor}`,
                     text: `location of acquisition is ${acquisition.location}`,
                     mrkdwn_in: ['text', 'pretext']

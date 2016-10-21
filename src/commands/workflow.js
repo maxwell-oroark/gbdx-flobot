@@ -32,7 +32,7 @@ let callback = function (error, response, body) {
         let attachments = tasks.map((task) => {
           console.log("==task==")
           console.log(task)
-          let readableStart = moment(task.start_time).format('MMMM Do YYYY, h:mm:ss a')
+          let readableStartTime = moment(task.start_time).format('MMMM Do YYYY, h:mm:ss a')
           let colorMap = {
               complete : '#2ecc71'
               failed   : '#e74c3c'
@@ -40,22 +40,16 @@ let callback = function (error, response, body) {
           let statusColor = colorMap[task.state.state]
           return {
             title: `${task.id} / ${task.taskType} `,
+            pretext: ``,
             color: `${statusColor}`
-            text: `Your task started at ${readableStart} and the status is ${task.state.state}`,
+            text: `Your task started at ${readableStartTime} and the status is ${task.state.state}`,
             mrkdwn_in: ['text', 'pretext']
           }
         })
 
         let msg = _.defaults({
             channel: payload.channel_name,
-            attachments: [
-                {
-                    color: '#f1c40f',
-                    text: `this response is under construction
-                        but your workflow id is: ${workflowId}`,
-                    mrkdwn_in: ['text']
-                }
-            ]
+            attachments: attachments
         }, msgDefaults)
 
         res.set('content-type', 'application/json')

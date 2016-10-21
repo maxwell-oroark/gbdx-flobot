@@ -14,7 +14,8 @@ const config = {
   STARBOT_COMMAND_TOKEN: process.env.STARBOT_COMMAND_TOKEN,
   SLACK_TOKEN: process.env.SLACK_TOKEN,
   GBDX_ACCESS_TOKEN: process.env.GBDX_ACCESS_TOKEN,
-  ICON_EMOJI: ':stars:'
+  ICON_EMOJI: ':stars:',
+  DATABASE_URL: process.env.DATABASE_URL
 }
 
 module.exports = (key) => {

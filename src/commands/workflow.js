@@ -4,6 +4,7 @@ const _ = require('lodash')
 const config = require('../config')
 const request = require('request')
 const token = config('GBDX_ACCESS_TOKEN')
+const moment = require('moment')
 
 const constructionAttachment = [
     {
@@ -13,7 +14,6 @@ const constructionAttachment = [
     }
 ]
 
-
 const msgDefaults = {
   response_type: 'in_channel',
   username: 'Starbot',
@@ -21,9 +21,50 @@ const msgDefaults = {
   attachments: constructionAttachment
 }
 
+
 const handler = (payload, res) => {
 
     let workflowId = payload.text.match(/\d+/)[0]
+
+    let callback = function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            let tasks = JSON.parse(body).tasks
+            console.log("===tasks")
+            console.log(tasks)
+
+            // map over tasks here
+
+            let attachments = tasks.slice().map((task) => {
+                console.log("==task==")
+                console.log(task)
+                let readableStartTime = moment(task.start_time).format('MMMM Do YYYY, h:mm:ss a')
+                let colorMap = {
+                    complete : '#2ecc71',
+                    failed   : '#e74c3c'
+                }
+                let statusColor = colorMap[task.state.state]
+                return {
+                    title: `${task.id} / ${task.taskType} `,
+                    pretext: ``,
+                    color: `${statusColor}`,
+                    text: `Your task started at ${readableStartTime} and the status is ${task.state.state}`,
+                    mrkdwn_in: ['text', 'pretext']
+                }
+            })
+
+            console.log("===attachments===")
+            console.log(attachments)
+
+            let msg = _.defaults({
+                channel: payload.channel_name,
+                attachments: attachments
+            }, msgDefaults)
+
+            res.set('content-type', 'application/json')
+            res.status(200).json(msg)
+        }
+        return;
+    }
 
     let options = {
         url: `https://geobigdata.io/workflows/v1/workflows/${workflowId}`,
@@ -31,30 +72,6 @@ const handler = (payload, res) => {
             'Authorization':`Bearer ${token}`,
             'Content-Type': 'application/json',
         }
-    }
-
-    let callback = function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            let tasks = JSON.parse(body).tasks
-            console.log("tasks")
-            console.log(tasks)
-
-            let msg = _.defaults({
-                channel: payload.channel_name,
-                attachments: [
-                    {
-                        color: '#f1c40f',
-                        text: `this response is under construction
-                        but your workflow id is: ${workflowId}`,
-                        mrkdwn_in: ['text']
-                    }
-                ]
-            }, msgDefaults)
-
-            res.set('content-type', 'application/json')
-            res.status(200).json(msg)
-        }
-        return;
     }
 
     request(options,callback)

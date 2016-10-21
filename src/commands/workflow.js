@@ -41,7 +41,7 @@ let callback = function (error, response, body) {
           return {
             title: `${task.id} / ${task.taskType} `,
             pretext: ``,
-            color: `${statusColor}`
+            color: `${statusColor}`,
             text: `Your task started at ${readableStartTime} and the status is ${task.state.state}`,
             mrkdwn_in: ['text', 'pretext']
           }

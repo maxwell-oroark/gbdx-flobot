@@ -34,7 +34,7 @@ let callback = function (error, response, body) {
           console.log(task)
           let readableStartTime = moment(task.start_time).format('MMMM Do YYYY, h:mm:ss a')
           let colorMap = {
-              complete : '#2ecc71'
+              complete : '#2ecc71',
               failed   : '#e74c3c'
           }
           let statusColor = colorMap[task.state.state]

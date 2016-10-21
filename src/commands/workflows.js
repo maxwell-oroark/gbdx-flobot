@@ -5,6 +5,7 @@ const _ = require('lodash')
 const config = require('../config')
 const request = require('request')
 const token = config('GBDX_ACCESS_TOKEN')
+const db = require('database/database');
 
 const noWorkflowsAttachment = [
     {
@@ -39,30 +40,27 @@ function callback(error, response, body) {
         let workflows = JSON.parse(body).Workflows
         console.log("workflows")
         console.log(workflows)
-        let attachments = parseWorkflows(workflows)
-
-        let msg = _.defaults({
-            channel: payload.channel_name,
-            attachments: attachments
-        }, msgDefaults)
-
-        res.set('content-type', 'application/json')
-        res.status(200).json(msg)
     }
     return;
 }
 
 const handler = (payload, res) => {
 
-    let options = {
-        url: "https://geobigdata.io/workflows/v1/workflows",
-        headers: {
-            'Authorization':`Bearer ${token}`,
-            'Content-Type': 'application/json',
-        }
-    }
+    db.getWorkflowsForSlackUser(payload.user_name)
+        .then((workflows) => {
+            let attachments = parseWorkflows(workflows)
 
-    request(options, callback)
+            let msg = _.defaults({
+                channel: payload.channel_name,
+                attachments: attachments
+            }, msgDefaults)
+
+            res.set('content-type', 'application/json')
+            res.status(200).json(msg);
+        })
+        .catch((err) => {
+
+        })
 
     return;
 

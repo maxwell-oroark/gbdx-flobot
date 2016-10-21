@@ -5,6 +5,7 @@ const config = require('../config')
 const request = require('request')
 const token = config('GBDX_ACCESS_TOKEN')
 const moment = require('moment')
+const db = require('database/database');
 
 const constructionAttachment = [
     {
@@ -26,9 +27,9 @@ const handler = (payload, res) => {
 
     let workflowId = payload.text.match(/\d+/)[0]
 
-    let callback = function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            let tasks = JSON.parse(body).tasks
+    db.getWorkflowForSlackUser(payload.user_name, workflowId)
+        .then((workflow) => {
+            let tasks = workflow.tasks
             console.log("===tasks")
             console.log(tasks)
 
@@ -62,19 +63,11 @@ const handler = (payload, res) => {
 
             res.set('content-type', 'application/json')
             res.status(200).json(msg)
-        }
-        return;
-    }
 
-    let options = {
-        url: `https://geobigdata.io/workflows/v1/workflows/${workflowId}`,
-        headers: {
-            'Authorization':`Bearer ${token}`,
-            'Content-Type': 'application/json',
-        }
-    }
+        })
+        .catch((err) => {
 
-    request(options,callback)
+        })
 
     return;
 

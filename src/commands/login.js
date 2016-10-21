@@ -6,6 +6,7 @@ const config = require('../config')
 const request = require('request')
 const token = config('GBDX_ACCESS_TOKEN')
 const moment = require('moment')
+const db = require('database/database');
 
 const constructionAttachment = [
     {
@@ -25,15 +26,17 @@ const msgDefaults = {
 
 const handler = (payload, res) => {
 
-    let loginCreds = payload.text.split(' ')
-    // is array of login credentials
+    let loginCreds = payload.text.split(' ');
 
-
-    // do login stuff.
-
+    db.loginSlackUserToGbdx(payload.user_name, loginCreds[1], loginCreds[2], loginCreds[3])
+        .then(() => {
+            // login success
+        })
+        .catch((err) => {
+            // login fail
+        })
 
     return;
-
 }
 
 module.exports = { pattern: /workflow\s\d+/ig, handler: handler }

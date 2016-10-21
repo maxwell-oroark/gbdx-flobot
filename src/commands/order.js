@@ -38,7 +38,23 @@ const handler = (payload, res) => {
         if (!error && response.statusCode === 200) {
 
             console.log("===BODY===")
-            console.log(JSON.parse(body))
+            console.log(body.order_id)
+            // {
+            //   "order_id": "ebffda38-1d6e-4fff-9ae2-aaca94243c45",
+            //   "acquisitions": [
+            //     {
+            //       "acquisition_id": "1010010005231400",
+            //       "state": "delivered",
+            //       "location": "s3://receiving-dgcs-tdgplatform-com/055046034010_01_003"
+            //     },
+            //     {
+            //       "acquisition_id": "104001000506EE00",
+            //       "state": "delivered",
+            //       "location": "s3://receiving-dgcs-tdgplatform-com/055046005010_01_003"
+            //     }
+            //   ]
+            // }
+
 
             let msg = _.defaults({
                 channel: payload.channel_name,

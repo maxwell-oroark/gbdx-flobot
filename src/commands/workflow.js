@@ -52,6 +52,9 @@ const handler = (payload, res) => {
                 }
             })
 
+            console.log("===attachments===")
+            console.log(attachments)
+
             let msg = _.defaults({
                 channel: payload.channel_name,
                 attachments: attachments

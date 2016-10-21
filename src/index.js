@@ -8,7 +8,6 @@ const _ = require('lodash')
 const config = require('./config')
 const commands = require('./commands')
 const helpCommand = require('./commands/help')
-const isLoggedIn = require('./login/login.js')
 
 let bot = require('./bot')
 

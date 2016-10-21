@@ -34,7 +34,7 @@ const handler = (payload, res) => {
 
             // map over tasks here
 
-            let attachments = tasks.slice.map((task) => {
+            let attachments = tasks.slice().map((task) => {
                 console.log("==task==")
                 console.log(task)
                 let readableStartTime = moment(task.start_time).format('MMMM Do YYYY, h:mm:ss a')

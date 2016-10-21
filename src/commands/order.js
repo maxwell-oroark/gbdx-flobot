@@ -50,29 +50,12 @@ const handler = (payload, res) => {
                 }
                 let statusColor = colorMap[acquisition.state]
                 return {
-                    title: `${acquisition.order_id`,
+                    title: `${acquisition.order_id}`,
                     color: `${statusColor}`,
                     text: `location of acquisition is ${acquisition.location}`,
                     mrkdwn_in: ['text', 'pretext']
                 }
             })
-
-
-            // {
-            //   "order_id": "ebffda38-1d6e-4fff-9ae2-aaca94243c45",
-            //   "acquisitions": [
-            //     {
-            //       "acquisition_id": "1010010005231400",
-            //       "state": "delivered",
-            //       "location": "s3://receiving-dgcs-tdgplatform-com/055046034010_01_003"
-            //     },
-            //     {
-            //       "acquisition_id": "104001000506EE00",
-            //       "state": "delivered",
-            //       "location": "s3://receiving-dgcs-tdgplatform-com/055046005010_01_003"
-            //     }
-            //   ]
-            // }
 
 
 

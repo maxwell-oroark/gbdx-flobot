@@ -10,7 +10,7 @@ const moment = require('moment')
 
 const handler = (payload, res) => {
 
-    let catId = payload.text.split(' ')[2]
+    let catId = payload.text.split(' ')[1]
 
     console.log("====CAT ID===")
     console.log(catId)

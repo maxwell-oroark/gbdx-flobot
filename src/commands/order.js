@@ -43,8 +43,9 @@ const handler = (payload, res) => {
                 console.log("==acquisition==")
                 console.log(acquisition)
                 let colorMap = {
-                    delivered : '#2ecc71',
-                    ordering  : '#f1c40f',
+                    delivered : '#27ae60',
+                    ordering  : '#2ecc71',
+                    placed : '#3498db'
                     submitted   : '#e67e22'
                 }
                 let statusColor = colorMap[acquisition.state]

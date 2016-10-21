@@ -45,7 +45,7 @@ const handler = (payload, res) => {
                 let colorMap = {
                     delivered : '#27ae60',
                     ordering  : '#2ecc71',
-                    placed : '#3498db'
+                    placed : '#3498db',
                     submitted   : '#e67e22'
                 }
                 let statusColor = colorMap[acquisition.state]

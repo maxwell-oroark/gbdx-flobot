@@ -35,7 +35,7 @@ const handler = (payload, res) => {
 
     let callback = function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            let tasks = JSON.parse(body).Events
+            let tasks = JSON.parse(body)
             console.log("tasks")
             console.log(tasks)
 
